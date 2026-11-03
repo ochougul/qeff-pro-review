@@ -4,25 +4,31 @@ This repository packages the `ochougul-pr-reviewer` Codex skill for the team.
 The skill instructions, review evidence, helper script, and agent metadata are
 under `skills/ochougul-pr-reviewer/`.
 
-## Set up on your machine
+## Set up with a coding agent
 
-Install the GitHub CLI (`gh`) first. Then clone this repository and run the
-setup script:
+From this repository's root, ask your coding agent:
 
-Replace `OWNER` with the GitHub account or organization that owns this repo.
-
-```bash
-gh repo clone your-org/qeff-pro-review
-cd qeff-pro-review
-./setup.sh
+```text
+Set up this repo so I can review PRs in
+https://github.com/qualcomm/efficient-transformers. Run ./setup.sh and install
+the required tools if they are missing. Do not sign in to GitHub for me. When
+setup is done, give me the login command to run on my machine if I am not
+already signed in.
 ```
 
-Replace `your-org` with the GitHub account or organization that owns this repo.
+The setup script installs GitHub CLI (`gh`), Git, and Python 3 when needed on
+Linux or macOS, then installs the skill globally for Codex and Claude Code
+under `${CODEX_HOME:-~/.codex}/skills/` and
+`${CLAUDE_CONFIG_DIR:-~/.claude}/skills/`. If GitHub CLI is not signed in, it
+prints this one-time command for you to run:
 
-The script starts `gh auth login` if you are not already signed in to GitHub,
-then installs the skill under `${CODEX_HOME:-~/.codex}/skills/`. GitHub CLI
-keeps your login on your machine; credentials are not stored in this repo.
-Restart Codex after setup so it discovers the skill.
+```bash
+gh auth login --hostname github.com
+```
+
+The script never starts the login flow or handles your credentials. Once
+signed in, you can use the skill to review PRs in
+`qualcomm/efficient-transformers`.
 
 To verify the installation without copying the files again:
 
@@ -30,7 +36,8 @@ To verify the installation without copying the files again:
 ./setup.sh --verify
 ```
 
-Set `CODEX_HOME` if your Codex files live somewhere other than `~/.codex`.
+Set `CODEX_HOME` or `CLAUDE_CONFIG_DIR` if those tools use custom config
+directories. The `--verify` option checks both global installations.
 
 ## Refresh review evidence
 

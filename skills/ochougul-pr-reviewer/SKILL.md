@@ -5,8 +5,9 @@ description: Review pull requests in quic/efficient-transformers using only revi
 
 # Ochougul PR reviewer
 
-Prepare a high-signal GitHub review. Keep it unposted by default; post it only when
-the user explicitly requests publication for the reviewed PR and commit.
+Prepare a high-signal GitHub review. Always show the complete review draft to
+the user, then ask whether to post that draft for the reviewed PR and commit.
+Post it only after the user answers yes.
 
 ## Evidence boundary
 
@@ -47,9 +48,12 @@ file-owned, and the main reviewer remains responsible for complete coverage and 
    - `REQUEST_CHANGES` for unresolved correctness, architecture, state/lifecycle, or readiness problems.
    - `APPROVE` when no blocking concern remains; explicitly record acceptable residual debt.
    - `COMMENT` for an incomplete pass or non-blocking questions that require author context.
-9. Return the structured draft below. Do not post it unless the user explicitly
-requests publication. When publication is explicitly requested, verify the head
-SHA is still current and submit the review through the GitHub review workflow.
+9. Show the complete structured draft below to the user, then ask whether to
+post that exact review to the PR at the reviewed commit. Wait for an explicit
+yes before posting. If the user says no or does not answer, leave it as a draft.
+After a yes, verify the head SHA is still current and submit the review through
+the GitHub review workflow. If the head changed, do not post the stale draft;
+review the new head and show the revised draft for confirmation.
 
 ## Output
 
@@ -93,6 +97,7 @@ comments were fixed does not establish `review addressed`; the reviewer must
 complete the existing workflow on the updated head and return `APPROVE`.
 
 This status describes review only, not CI success or merge readiness. Keep the
-existing evidence boundary, review lenses, comment style, verdict rules, and
-publication policy unchanged. If publication is explicitly authorized, submit
-only the nested `review` payload after the existing current-head check.
+existing evidence boundary, review lenses, comment style, and verdict rules
+unchanged. Show the complete envelope to the user and ask before posting. After
+the user says yes, submit only the nested `review` payload after verifying that
+the reviewed head SHA is still current.
