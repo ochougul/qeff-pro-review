@@ -1,0 +1,4 @@
+interface:
+  display_name: "QEff PR Reviewer"
+  short_description: "Review PRs using Ochougul review patterns"
+  default_prompt: "Use $qeff-pro-review to review this QEfficient pull request and prepare a GitHub review draft."

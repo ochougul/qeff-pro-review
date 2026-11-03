@@ -2,11 +2,11 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-skill_source="$repo_root/skills/ochougul-pr-reviewer"
+skill_source="$repo_root/skills/qeff-pro-review"
 codex_home="${CODEX_HOME:-$HOME/.codex}"
 claude_home="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
-codex_skill_dest="$codex_home/skills/ochougul-pr-reviewer"
-claude_skill_dest="$claude_home/skills/ochougul-pr-reviewer"
+codex_skill_dest="$codex_home/skills/qeff-pro-review"
+claude_skill_dest="$claude_home/skills/qeff-pro-review"
 verify_only="false"
 required_tools=(gh git python3)
 
@@ -128,11 +128,11 @@ fi
 }
 
 if [[ "$verify_only" == "true" ]]; then
-  echo "Verified ochougul-pr-reviewer for Codex at $codex_skill_dest"
-  echo "Verified ochougul-pr-reviewer for Claude Code at $claude_skill_dest"
+  echo "Verified qeff-pro-review for Codex at $codex_skill_dest"
+  echo "Verified qeff-pro-review for Claude Code at $claude_skill_dest"
 else
-  echo "Installed ochougul-pr-reviewer for Codex at $codex_skill_dest"
-  echo "Installed ochougul-pr-reviewer for Claude Code at $claude_skill_dest"
+  echo "Installed qeff-pro-review for Codex at $codex_skill_dest"
+  echo "Installed qeff-pro-review for Claude Code at $claude_skill_dest"
 fi
 
 if gh auth status --hostname github.com >/dev/null 2>&1; then

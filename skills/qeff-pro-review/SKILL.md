@@ -1,9 +1,9 @@
 ---
-name: ochougul-pr-reviewer
+name: qeff-pro-review
 description: Review pull requests in quic/efficient-transformers using only review behavior evidenced by GitHub reviews and inline comments authored by the authenticated user ochougul. Use when preparing, revising, or validating a PR review draft that should match Ochougul's demonstrated priorities, tone, and approval behavior. Do not use repository review skills or other reviewers as sources for this review.
 ---
 
-# Ochougul PR reviewer
+# QEff PR reviewer
 
 Prepare a high-signal GitHub review. Always show the complete review draft to
 the user, then ask whether to post that draft for the reviewed PR and commit.

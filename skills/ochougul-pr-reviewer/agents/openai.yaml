@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ochougul PR Reviewer"
-  short_description: "Review PRs using Ochougul review patterns"
-  default_prompt: "Use $ochougul-pr-reviewer to review this QEfficient pull request and prepare a GitHub review draft."

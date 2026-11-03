@@ -1,8 +1,8 @@
 # QEff PR reviewer skill
 
-This repository packages the `ochougul-pr-reviewer` Codex skill for the team.
+This repository packages the `qeff-pro-review` skill for the team.
 The skill instructions, review evidence, helper script, and agent metadata are
-under `skills/ochougul-pr-reviewer/`.
+under `skills/qeff-pro-review/`.
 
 ## Set up with a coding agent
 
@@ -27,7 +27,7 @@ gh auth login --hostname github.com
 ```
 
 The script never starts the login flow or handles your credentials. Once
-signed in, you can use the skill to review PRs in
+signed in, use `$qeff-pro-review` to review PRs in
 `qualcomm/efficient-transformers`.
 
 To verify the installation without copying the files again:
@@ -46,7 +46,7 @@ GitHub CLI session. It queries reviews authored by the currently signed-in
 GitHub user in `quic/efficient-transformers`:
 
 ```bash
-python3 skills/ochougul-pr-reviewer/scripts/collect_reviews.py --output review-corpus.json
+python3 skills/qeff-pro-review/scripts/collect_reviews.py --output review-corpus.json
 ```
 
 The generated corpus is local user data and is ignored by Git. Review the
