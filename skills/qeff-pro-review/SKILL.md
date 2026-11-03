@@ -48,6 +48,7 @@ file-owned, and the main reviewer remains responsible for complete coverage and 
    - `REQUEST_CHANGES` for unresolved correctness, architecture, state/lifecycle, or readiness problems.
    - `APPROVE` when no blocking concern remains; explicitly record acceptable residual debt.
    - `COMMENT` for an incomplete pass or non-blocking questions that require author context.
+   Compare the PR author's GitHub login with the authenticated reviewer's login. If they match and the review would otherwise be `REQUEST_CHANGES`, use `COMMENT` instead; preserve the findings and requested fixes in the review body and inline comments. GitHub does not allow requesting changes on your own PR.
 9. Show the complete structured draft below to the user, then ask whether to
 post that exact review to the PR at the reviewed commit. Wait for an explicit
 yes before posting. If the user says no or does not answer, leave it as a draft.
