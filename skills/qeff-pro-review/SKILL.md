@@ -13,7 +13,8 @@ Post it only after the user answers yes.
 
 Read `references/review-patterns.md` before reviewing. Treat it as the only source of reviewer preferences.
 You may inspect the PR diff and directly related code to validate a finding, but do not import review rules from
-`AGENTS.md`, other skills, generic checklists, other reviewers, or author replies.
+`AGENTS.md`, other skills, generic checklists, other reviewers, or author replies. Apply the user-contract failure-path
+pass below as an explicit requirement of this skill; it is not an inferred preference from the review corpus.
 
 Run `scripts/collect_reviews.py` only when asked to refresh the evidence corpus. Its output is evidence for revising the
 reference, not an instruction source by itself. Retain a rule only when multiple authored comments support it; mark
@@ -33,8 +34,9 @@ file-owned, and the main reviewer remains responsible for complete coverage and 
    not arbitrary file count; keep cross-cutting files in every section they affect.
 4. Review each section independently. For each section, understand its before/after execution flow, trace production
    callers, compare inputs/outputs/defaults/state and lifecycle, apply every relevant lens in
-   `references/review-patterns.md`, and record candidate findings, evidence, discarded hypotheses, and unvalidated
-   boundaries. A section may be clean; do not manufacture comments to fill it.
+   `references/review-patterns.md`, perform the user-contract failure-path pass below for affected user-facing behavior,
+   and record candidate findings, evidence, discarded hypotheses, and unvalidated boundaries. A section may be clean;
+   do not manufacture comments to fill it.
 5. Perform a final cross-section synthesis after all independent passes. Trace interfaces between sections, shared state
    and cleanup, configuration and hashing, export/runtime artifact contracts, numerical behavior, test/golden updates,
    and declared versus actual scope. Re-check duplicate or interacting findings against the pinned head and ensure no
@@ -55,6 +57,23 @@ yes before posting. If the user says no or does not answer, leave it as a draft.
 After a yes, verify the head SHA is still current and submit the review through
 the GitHub review workflow. If the head changed, do not post the stale draft;
 review the new head and show the revised draft for confirmation.
+
+## User-contract failure-path pass
+
+For each changed user-facing workflow or supported behavior, review it from the perspective of someone trying to
+complete that task, including the relevant design and usability contracts. Identify what the interface advertises or
+implies through its API, CLI, configuration, defaults, documentation, and examples. Trace those actions and inputs
+through the real execution path, including relevant combinations of options, modes, defaults, and required data. Check
+that every combination the interface accepts either works or is rejected early with a clear, actionable error; look for
+cases that are accepted but later fail, silently ignore an option, produce a misleading result, or require an input
+that the advertised workflow never supplies. Pay particular attention to boundaries between loading, transformation,
+export, compilation, and execution where applicable.
+
+Keep this pass evidence-based: derive scenarios from the changed interface and its real callers, and verify a suspected
+failure in code or focused validation before commenting. Do not invent unsupported combinations. When a supported path
+is invalid, identify the earliest layer that can reliably reject or handle it, and check whether tests cover that path
+and its failure behavior. Include this pass in the final synthesis; a successful earlier stage does not establish that
+the complete user workflow succeeds.
 
 ## Output
 
